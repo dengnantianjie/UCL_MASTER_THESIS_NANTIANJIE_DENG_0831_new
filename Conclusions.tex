@@ -2,7 +2,14 @@
 \label{chapterlabel6}
 
 \section{Summary}
-\section{Future Work}
+Topic modelling has been widely used in textual related application including document tagging, summarization and mining. In this project we have studied  the problem of topic extraction and evolution of news stream data and proposed a news Dynamic Author-Topic model which draws the strength of Author-Topic model for its hierarchical structure and Dynamic Topic model for its capability of leveraging temporal information. The dynamic nature of topics across time are perfectly discovered by our model proven by our effective experiment with the other three cutting-edge topic model algorithm, namely LDA, AT and TTM. We have implemented the in total four algorithms in the same environment and evaluate in terms of topic extraction, topic generalization and topic evolution. The results demonstrate that compared to LDA and TTM model which can only discover general words for a specific topic DAT is able to find time-related hot news topic and its word distribution over topic is much more diverse. Therefore it is beneficial to explore the buzz words for the news topic instead of the sight words. We also show that DAT is able to prevent itself from confounding between different events with co-occurrence patterns whereas TTM fail to do it. 
 
-% This just dumps some pseudolatin in so you can see some text in place.
-\blindtext
+\section{Future Work}
+The research of our work is far from over. In the future work we intent to spread Dynamic Author-Topic model into more in-depth area. There are some of my thoughts:
+\begin{itemize}
+    \item In this thesis, we apply DAT model on BBC news to compare the performance with other existed models. In future, we can apply DAT model on other areas, such as online document, blog text and digital library system for information discovery. 
+    \item For the BBC news we only concern the effect of time for our work, however, there are many useful attributions which can be taken into consideration, like the location of the news. In the future we can address the location information into analysis which brings the new view for latent topic generation.
+    \item The dataset we use this time is the BBC news, which is relatively long compared with messages in social network, like Twitter or instagram. DAT model can be used for the discover of role and connection in social networking, which can extract the related interaction among different people.
+    \item Currently we are using Gibbs collapsed sampling method for model inference, however other methods, such as variation inference~\footnote{https://www.cs.princeton.edu/courses/archive/fall11/cos597C/lectures/variational-inference-i.pdf} can also be leveraged for the model inference. Since our target is to enable BBC news with automatic news classification and tagging we need to consider large-scale implementation using distributed system for which variation inference is more effective. 
+    \item We take the five-month's BBC news as the data for performance analysis in different weeks. We can take more data in the future which can be used for researching the effect of DAT model in different ten years.
+\end{itemize}

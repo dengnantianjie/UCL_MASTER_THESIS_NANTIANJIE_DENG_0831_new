@@ -1,27 +1,28 @@
 \chapter{Results and Analysis}
 \label{chapterlabel5}
+Chapter~\ref{chapterlabel4} introduces the layout of the experiment. In Chapter~\ref{chapterlabel5} the experimental results will be shown as well as the comparison with three baselines.
 
 \section{Performance Comparison between Dynamic Author-Topic and LDA Models}\label{sec:ldadat}
 
-The parameters of LDA  model is set as $\alpha = 0.01$, $\beta = 0.01$, with no authors.
-While, for Dynamic Author-topic model the $\alpha$  is initialized as 0.1, and $\beta$ is initialized as 0.01. For DAT model we set $\text{Author Number} = 9$ with other parameters the same as LDA. 
+In this section we will compare the performance of Dynamic Author-Topic (DAT) and LDA models. The parameters of LDA  model is set as $\alpha = 0.1$, $\beta = 0.01$.
+Similarly, for DAT model the $\alpha$  is initialized as 0.1, and $\beta$ is initialized as 0.01. Besides, we set the number of author as 9.
 
 \subsection{Perplexity}
-The perplexity comparison between LDA and DAT model is shown in Figure ~\ref{fig:lda_dat_perplexity}, to answer \textbf{RQ6}. A lower perplexity score indicates a better generalization performance of the model. Figure ~\ref{fig:lda_dat_perplexity} shows that our DAT model performs poorer than LDA early on but with more prior information are introduced we see the cross-over point where DAT model adapts better to our news corpus. And with the increasing number of topic numbers, we observe that both model performs better while DAT is more adaptive which answers \textbf{RQ5}. The inferior performance of DAT with low number of topic number is that our author number is fixed as 9 which restrict the flexibility of topic assignment to the news, and author assignments become randomly in this case.
+The perplexity comparison between LDA and DAT models is shown in Figure~\ref{fig:lda_dat_perplexity}, to answer \textbf{RQ6}. A lower perplexity score indicates a better generalization performance of the model. Figure~\ref{fig:lda_dat_perplexity} shows that our DAT model performs poorer than LDA early on but with more prior information are introduced we see the cross-over point where DAT model adapts better to our news corpus. And with the increasing number of topic numbers, we observe that both model performs better while DAT is more adaptive which answers \textbf{RQ5}. The inferior performance of DAT with low number of topic number is that our author number is fixed as 9 which restrict the flexibility of topic assignment to the news, and author assignments become randomly in this case.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1\textwidth]{figures/lda_dat_perplexity.png}
+\includegraphics[width=0.7\textwidth]{figures/lda_dat_perplexity.png}
 \caption{Mean perplexity of DAT and LDA with varying numbers of latent topics.}
 \label{fig:lda_dat_perplexity}
 \end{figure}
 
-\subsection{Topic Distribution}
-Here we try to evaluate the classification performance of the two model in order to answer \textbf{RQ1,3, 4}. The topic number $K$ is set as 20 here for expriment purpose. Topic- category distribution for LDA model is shown in Figure ~\ref{fig:lda_with_weights} with the instruction in Section ~\ref{sec:topicassignment} to evaluate the news segmentation, the facet wrap plot shows for each topic (1 to 20) how many articles are tagged with 1 of the 8 categories (the articles falling in category \textit{politics} are all also with category tag of \textit{UK} or \textit{world}, so articles with tag \textit{politics} are ignored here  ). From Figure ~\ref{fig:lda_with_weights} we can observe that using LDA model the topic segmentation is prominent since for in most (18 our of 20) of the topics there is only one category dominating the tohers in terms of article number. For example, after training with LDA model, in total about 100 articles are assigned to \textit{Topic 4} which is on the upper right corner in Figure ~\ref{fig:lda_with_weights}, where 62 articles are co-tagged with category \textit{entertainment} as predefined. This co-occurrence indicates that \textit{Topic 4} can be manually interpreted as \textit{entertainment}. This can be double-checked with viewing the most relevant words for each topic where appropriate shown in Table ~\ref{table:ldatopicdistribution}
+\subsection{Topic Distribution}\label{ldadat_td}
+Here we try to evaluate the classification performance of the two model in order to answer \textbf{RQ1,3, 4}. The topic number $K$ is set as 20 here for expriment purpose. Topic- category distribution for LDA model is shown in Figure~\ref{fig:lda_with_weights} with the instruction in Section~\ref{sec:topicassignment} to evaluate the news segmentation, the facet wrap plot shows for each topic (1 to 20) how many articles are tagged with 1 of the 8 categories (the articles falling in category \textit{politics} are all also with category tag of \textit{UK} or \textit{world}, so articles with tag \textit{politics} are ignored here  ). From Figure~\ref{fig:lda_with_weights} we can observe that using LDA model the topic segmentation is prominent since for in most (18 our of 20) of the topics there is only one category dominating the tohers in terms of article number. For example, after training with LDA model, in total about 100 articles are assigned to \textit{Topic 4} which is on the upper right corner in Figure~\ref{fig:lda_with_weights}, where 62 articles are co-tagged with category \textit{entertainment} as predefined. This co-occurrence indicates that \textit{Topic 4} can be manually interpreted as \textit{entertainment}. This can be double-checked with viewing the most relevant words for each topic where appropriate shown in Table~\ref{table:ldatopicdistribution}.
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{figures/lda_with_weights.pdf}
-\caption{Topic-Categoy distribution of LDA model.}
+\caption{Topic-categoy distribution of LDA model.}
 \label{fig:lda_with_weights}
 \end{figure}
 
@@ -206,20 +207,20 @@ Here we try to evaluate the classification performance of the two model in order
  \hline
   
  \end{tabular}
-\caption{LDA Topic-Word distribution}
+\caption{The topic-word distribution of LDA model}
 \label{table:ldatopicdistribution}
 \end{table}
 
-In Table ~\ref{table:ldatopicdistribution} we have selected 6 topics to show its top 20 words with highest probabilities conditioned on the topics. The title of the topic is our manual interpretation based on Figure ~\ref{fig:lda_with_weights}. It is easily to see that for each table the words are definitely relevant to the topic itself. For example, for \textit{Topic 6, health} we can see the words like \textit{hostipital, petient, cancer, drug, treatment, zika, NHS, virus}, etc. and for \textit{Topic 16, education}, we see words like \textit{school, children, teacher, staff, primary, improve}, etc, which are all type of words for \textit{education}. 
+In Table~\ref{table:ldatopicdistribution} we have selected 6 topics to show its top 20 words with highest probabilities conditioned on the topics. The title of the topic is our manual interpretation based on Figure~\ref{fig:lda_with_weights}. It is easily to see that for each table the words are definitely relevant to the topic itself. For example, for \textit{Topic 6, health} we can see the words like \textit{hostipital, petient, cancer, drug, treatment, zika, NHS, virus}, etc. and for \textit{Topic 16, education}, we see words like \textit{school, children, teacher, staff, primary, improve}, etc, which are all type of words for \textit{education}. 
 
 However, although the topics segmentation is clear for LDA model, we see two drawbacks with the model.
 \begin{itemize}
     \item Firstly, we cannot see the trends of the news, namely how the topics rise and fall for a certain news event. Therefore we see the words for each topic is just general words spreading through the time, for example, if we look at the words for \textit{Topic 7, tech}, it is obviously that all the words are describing technology itself however it is hardly to speculate what kind of news is happening specifically.
-    \item Secondly, LDA model will confound the topics between different news event. For example, for \textit{Topic 6, health}, the words \textit{drug, treatment, hospital} are related to the events that in May the NHS will not fund anti-HIV Prep drug plan \footnote{http://www.bbc.co.uk/news/health-36421124}, while \textit{zika} and \textit{virus} are extracted from the news events of the devastating epidemic Zika virus in Africa \footnote{http://www.bbc.co.uk/news/health-36379455}. It is not clear what news events are captured by LDA model exactly. 
+    \item Secondly, LDA model will confound the topics between different news event. For example, for \textit{Topic 6, health}, the words \textit{drug, treatment, hospital} are related to the events that in May the NHS will not fund anti-HIV Prep drug plan~\footnote{http://www.bbc.co.uk/news/health-36421124}, while \textit{zika} and \textit{virus} are extracted from the news events of the devastating epidemic Zika virus in Africa~\footnote{http://www.bbc.co.uk/news/health-36379455}. It is not clear what news events are captured by LDA model exactly. 
 \end{itemize}
 
 Then for DAT model, we are now running the experiment based on short-term dependency with time-period as a week. In total there are 22 weeks spreading the whole corpus, we have selected 4 of them for investigation.
-Topic category distribution for DAT model is shown in Figure ~\ref{subfig:11dattopiccategory} (From Jan 1 to Jan 7), Figure ~\ref{subfig:212dattopiccategory} (From Feb 12 to Feb 19), Figure ~\ref{subfig:34dattopiccategory} (From Jan Mar 4 to Mar 11), and Figure ~\ref{subfig:520dattopiccategory} (From May 20 to May 27).
+Topic category distribution for DAT model is shown in Figure~\ref{subfig:11dattopiccategory} (From Jan 1 to Jan 7), Figure~\ref{subfig:212dattopiccategory} (From Feb 12 to Feb 19), Figure~\ref{subfig:34dattopiccategory} (From Jan Mar 4 to Mar 11), and Figure~\ref{subfig:520dattopiccategory} (From May 20 to May 27).
 
 Using the same way as for exploring LDA model as above, for the four different weeks we firstly find the prominence category for each topic which will be the topic's representative, and secondly we check the most relevant words associated with each topic to see whether they are valid to discover news events.
 
@@ -239,45 +240,45 @@ Using the same way as for exploring LDA model as above, for the four different w
     \subfigure[2016.05.20 to 2016.05.27]{
     \label{subfig:520dattopiccategory} 
     \includegraphics[width=.48\columnwidth]{figures/520datcatogery.pdf}}
-\caption{\small Topic-Category distribution of DAT model for 4 different weeks, which are between 2016.01.01 to 2016.01.07, between 2016.02.12 to 2016.02.19, between 2016.03.04 to 2016.03.11 and between 2016.05.20 to 2016.05.27}
+\caption{\small Topic-category distribution of DAT model for 4 different weeks, which are between 2016.01.01 to 2016.01.07, between 2016.02.12 to 2016.02.19, between 2016.03.04 to 2016.03.11 and between 2016.05.20 to 2016.05.27}
 \label{fig:dattopiccategory}
 \end{figure*}
 
-Let's start with the category \textit{education}, its association with different topics at different time can be interpreted with Figure ~\ref{fig:dattopiccategory}. Its topic evolution can be shown as in Figure ~\ref{fig:dat_education_tc}.
+Let's start with the category \textit{education}, its association with different topics at different time can be interpreted with Figure~\ref{fig:dattopiccategory}. Its topic evolution can be shown as in Figure~\ref{fig:dat_education_tc}.
 
-It shows that compared to LDA model the DAT topics are more neatly and time-related. In the week of Jan 1st, we see the words of \textit{school} which appears in most of the education news at that time. the words \textit{nation, need,expect, career} are there is due to the news that \textit{the National College of Teaching and Leadership is expecting a surge of interest in the profession of teachers} \footnote{http://www.bbc.co.uk/news/education-35193600}. The reason you see \textit{islam} is because of the news that \textit{Trojan Horse scandal in Birmingham has been prohibited from teaching indefinitely}\footnote{http://www.bbc.co.uk/news/education-35226482}. You see \textit{travel} and \textit{MP} because of the news that \textit{Pupils in a primary school in Yorkshire will have to travel to another school for part of each day because of difficulties in recruiting a teacher}\footnote{http://www.bbc.co.uk/news/education-35242877}, and MPs on the Education Select Committee are warned of a deepening "crisis" in recruiting and retaining teachers.
+It shows that compared to LDA model the DAT topics are more neatly and time-related. In the week of Jan 1st, we see the words of \textit{school} which appears in most of the education news at that time. the words \textit{nation, need,expect, career} are there is due to the news that \textit{the National College of Teaching and Leadership is expecting a surge of interest in the profession of teachers}~\footnote{http://www.bbc.co.uk/news/education-35193600}. The reason you see \textit{islam} is because of the news that \textit{Trojan Horse scandal in Birmingham has been prohibited from teaching indefinitely}~\footnote{http://www.bbc.co.uk/news/education-35226482}. You see \textit{travel} and \textit{MP} because of the news that \textit{Pupils in a primary school in Yorkshire will have to travel to another school for part of each day because of difficulties in recruiting a teacher}~\footnote{http://www.bbc.co.uk/news/education-35242877}, and MPs on the Education Select Committee are warned of a deepening ``crisis" in recruiting and retaining teachers.
 
-Then in the week of Feb 12th, we use the similar way to check DAT's performance to discover topics and prevent from confusing different event news. Since there are less than 10 news about education in this week, so it is easily to envision that the words around this topic are from the news that \textit{A flagship scheme to bring ex-servicemen and women to England's classrooms has seen 28 veterans qualify as teachers since it started.}\footnote{http://www.bbc.co.uk/news/education-35595424}, \textit{Teacher shortages mean classroom support staff are doing work normally done by qualified teachers}\footnote{http://www.bbc.co.uk/news/education-35551009}, and some other news. 
+Then in the week of Feb 12th, we use the similar way to check DAT's performance to discover topics and prevent from confusing different event news. Since there are less than 10 news about education in this week, so it is easily to envision that the words around this topic are from the news that \textit{A flagship scheme to bring ex-servicemen and women to England's classrooms has seen 28 veterans qualify as teachers since it started}~\footnote{http://www.bbc.co.uk/news/education-35595424}, \textit{Teacher shortages mean classroom support staff are doing work normally done by qualified teachers}~\footnote{http://www.bbc.co.uk/news/education-35551009}, and some other news. 
 
-Then in the week of Mar 4th, we can see from the words that the hot news event are \textit{Harvard Law School is to change its official seal, after a protest that it had links to slavery.}\footnote{http://www.bbc.co.uk/news/education-35726878}, and \textit{a proposal of national funding formula for schools, which would be introduced next year, would see budgets going straight to schools, removing local authorities from being a channel for funding.}\footnote{http://www.bbc.co.uk/news/education-35775458}. 
+Then in the week of Mar 4th, we can see from the words that the hot news event are \textit{Harvard Law School is to change its official seal, after a protest that it had links to slavery}~\footnote{http://www.bbc.co.uk/news/education-35726878}, and \textit{a proposal of national funding formula for schools, which would be introduced next year, would see budgets going straight to schools, removing local authorities from being a channel for funding}~\footnote{http://www.bbc.co.uk/news/education-35775458}. 
 
-Lastly in the week of May 20th, some education news started to discuss on British EU referendum, and also the topic are also related to the news that \textit{Head teachers are calling on the education secretary to stop the publication of this year's primary school results in England.}\footnote{http://www.bbc.co.uk/news/education-36372304}. 
+Lastly in the week of May 20th, some education news started to discuss on British EU referendum, and also the topic are also related to the news that \textit{Head teachers are calling on the education secretary to stop the publication of this year's primary school results in England.}~\footnote{http://www.bbc.co.uk/news/education-36372304}. 
 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{figures/dat_education_tc.png}
-\caption{Topic Evolution of DAT model: Use Education as Example}
+\caption{Topic evolution of DAT model: use Education as an example}
 \label{fig:dat_education_tc}
 \end{figure}
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{figures/dat_uk_tc.png}
-\caption{Topic Evolution of DAT model: Use UK as Example}
+\caption{Topic evolution of DAT model: use UK as an example}
 \label{fig:dat_uk_tc}
 \end{figure}
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{figures/dat_health_tc.png}
-\caption{Topic Evolution of DAT model: Use Health as Example}
+\caption{Topic evolution of DAT model: use health as an example}
 \label{fig:dat_health_tc}
 \end{figure}
 
-Another example we can show is for category \textit{UK}, which is presented in Figure ~\ref{fig:dat_uk_tc}.
+Another example we can show is for category \textit{UK}, which is presented in Figure~\ref{fig:dat_uk_tc}.
 
-In the week of Jan 1st, quite a few news are about \textit{police, murder, secure, }, such as \textit{Man arrested over murder of Daria Pionko in Leeds}\footnote{http://www.bbc.co.uk/news/uk-england-leeds-35209489}, \textit{Pitsea stairwell death: Two men bailed by police}\footnote{http://www.bbc.co.uk/news/uk-england-essex-35209578},etc. Also we see record-breaking rainfall north-west England as the news discussed \footnote{http://www.bbc.co.uk/news/uk-england-35222030}. Then in teh week of Feb 12th, we see the news about \textit{UCL's research that a patient embodying themselves in a virtual reality avatar of a crying child could help with depression}\footnote{http://www.bbc.co.uk/news/uk-35558447}. and \textit{search on Ben Nevis for missing climbers}\footnote{http://www.bbc.co.uk/news/uk-35594715} and mostly, the Syria crisis. Then when in the week of Mar 4th, one important UK news is that \textit{One of London mayoral hopeful Sadiq Khan's aides, Shueb Salar, has resigned following his suspension on Sunday.}\footnote{http://www.bbc.co.uk/news/uk-england-london-35744843}, the news that \textit{Clayton Williams tells court he 'did not intend to kill officer'}\footnote{http://www.bbc.co.uk/news/uk-35756062}, an incident at Hyder park gate \footnote{http://www.bbc.co.uk/news/uk-england-london-35752992}, and a few investigation of criminals. \footnote{http://www.bbc.co.uk/news/uk-wales-south-east-wales-35747691}. While in the week of May 20th, we still see a few news about murder \footnote{http://www.bbc.co.uk/news/uk-england-essex-36248166} \footnote{http://www.bbc.co.uk/news/uk-england-36376555} \footnote{http://www.bbc.co.uk/news/uk-england-manchester-36375040}, \textit{the news that European countries urged to improve data sharing to improve the way they gather and share information about firearms to cut gun crime}\footnote{http://www.bbc.co.uk/news/uk-36371145}, and surely many news about election in May.
+In the week of Jan 1st, quite a few news are about \textit{police, murder, secure}, such as \textit{Man arrested over murder of Daria Pionko in Leeds}~\footnote{http://www.bbc.co.uk/news/uk-england-leeds-35209489}, \textit{Pitsea stairwell death: Two men bailed by police}~\footnote{http://www.bbc.co.uk/news/uk-england-essex-35209578}, etc. Also we see record-breaking rainfall north-west England as the news discussed~\footnote{http://www.bbc.co.uk/news/uk-england-35222030}. Then in the week of Feb 12th, we see the news about \textit{UCL's research that a patient embodying themselves in a virtual reality avatar of a crying child could help with depression}~\footnote{http://www.bbc.co.uk/news/uk-35558447} and \textit{search on Ben Nevis for missing climbers}~\footnote{http://www.bbc.co.uk/news/uk-35594715} and mostly, the Syria crisis. Then when in the week of Mar 4th, one important UK news is that \textit{One of London mayoral hopeful Sadiq Khan's aides, Shueb Salar, has resigned following his suspension on Sunday}~\footnote{http://www.bbc.co.uk/news/uk-england-london-35744843}, the news that \textit{Clayton Williams tells court he `did not intend to kill officer'}~\footnote{http://www.bbc.co.uk/news/uk-35756062}, an incident at Hyder park gate~\footnote{http://www.bbc.co.uk/news/uk-england-london-35752992}, and a few investigation of criminals~\footnote{http://www.bbc.co.uk/news/uk-wales-south-east-wales-35747691}. While in the week of May 20th, we still see a few news about murder~\footnote{http://www.bbc.co.uk/news/uk-england-essex-36248166}~\footnote{http://www.bbc.co.uk/news/uk-england-36376555}~\footnote{http://www.bbc.co.uk/news/uk-england-manchester-36375040}, \textit{the news that European countries urged to improve data sharing to improve the way they gather and share information about firearms to cut gun crime}~\footnote{http://www.bbc.co.uk/news/uk-36371145}, and surely many news about election in May.
 
-The last example is the category of \textit{health}, we only show the topic evolution here in Figure ~\ref{fig:dat_health_tc}, which also uncovered the news trends among the 5 months.
+The last example is the category of \textit{health}, we only show the topic evolution here in Figure~\ref{fig:dat_health_tc}, which also uncovered the news trends among the 5 months.
 
 
 The other topics also have the same pattern of changing and evolution which can indicate the rising and falling of the topics over time. Compared to LDA model, DAT's Topic-Category distribution is not as prominent as LDA model so the topic segmentation is less clear than LDA. However, DAT obviously has the advantages that it tracks the news trends and words to describe the topics are time and event specifically, unlike for LDA model the words are mostly general words which spread through the whole news corpus's time. Also DAT will not be confused by different events and is able to identify the event-specific words for the topics. An good example is that the word \textit{Islam} appears as the one of the most relevant words for topic \textit{education} on Jan 1st. Although there is no direct relation between them however since there is a news about prohibiting Trojan Horse scandal which is hotly discussed so \textit{Islam} becomes relevant to \textit{education} in this special case.
@@ -287,27 +288,27 @@ Therefore to answer \textbf{RQ1} LDA outperforms DAT, and DAT is better for \tex
 
 \section{Performance Comparison between Dynamic Author-Topic and Author-Topic Models}
 
-In this section we will compare the performance of static Author-Topic model and the Dynamic Author-Topic model. The parameters of Author-topic model is set as $\alpha = 0.1$, $\beta = 0.01$, and the same as the number of categories of BBC news, $\text{Author Number} = 9$, and the topic number here is set as 20. The Dynamic Author-Topic model has exactly the same parameters as the static one.
+In this section we will compare the performance of static Author-Topic model and the Dynamic Author-Topic model. The parameters of Author-topic model is set as $\alpha = 0.1$, $\beta = 0.01$, $\text{Author Number} = 9$. For the experiment in Section~\ref{at_dat_td} the topic number is set as 20. The Dynamic Author-Topic model has exactly the same parameters as the static one.
 
 \subsection{Perplexity}
-The comparison of the perplexity of the two models with different number of topics is shown in Figure ~\ref{fig:at_dat_perplexity}. To answer \textbf{RQ5},Dynamic Author-Topic model's performance is improved with the increasing number of topics. However, the performance of Author-Topic model stay unchanged which is because the expectation that answer will match its previous output of its author limit its predictive power of the author-topic model since actually no two news are exactly the same. The authorship information does not contribute to the predictive capability of AT model in this case since we the 9 authors we have are virtual ones with no valid meaning. The writing styles of the news from category \textit{UK} and \textit{education} are overlapped and confused between each other. So the authorship are somewhat randomly assigned to the word tokens for AT model. Our proposed model is adaptive to the changing writing styles of the news so that the randomness is removed to some extent. To answer \textbf{RQ6}, DAT has much better topic generalization performance than AT model.
+The comparison of the perplexity of the two models with different number of topics is shown in Figure~\ref{fig:at_dat_perplexity}. To answer \textbf{RQ5}, Dynamic Author-Topic model's performance is improved with the increasing number of topics. However, the performance of Author-Topic (AT) model stay unchanged which is because the expectation that answer will match its previous output of its author limit its predictive power of the AT model since actually no two news are exactly the same. The authorship information does not contribute to the predictive capability of AT model in this case since we the nine authors we have are virtual ones with no valid meaning. The writing styles of the news from category \textit{UK} and \textit{education} are overlapped and confused between each other. So the authorship are somewhat randomly assigned to the word tokens for AT model. Our proposed model is adaptive to the changing writing styles of the news so that the randomness is removed to some extent. To answer \textbf{RQ6}, DAT has much better topic generalization performance than AT model.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=1\textwidth]{figures/at_dat_perplexity.png}
+\includegraphics[width=0.7\textwidth]{figures/at_dat_perplexity.png}
 \caption{Mean perplexity of DAT and AT with varying numbers of latent topics.}
 \label{fig:at_dat_perplexity}
 \end{figure}
 
-\subsection{Topic Distribution}
+\subsection{Topic Distribution}\label{at_dat_td}
 
 
-Similar to Table ~\ref{table:ldatopicdistribution}, here we have shown the examples of 6 topics with author information, but here due to space limitation we only show the top 10 most likely words to be generated conditioned on the topic, and 4 top most likely authors to have generated a word conditioned on the topic. The topic-category distribution of the Author-Topic model is shown in Figure ~\ref{fig:at_topic_category}. And our interpreting of the topic as well its words distribution can be shown in Table ~\ref{table:at_topic_distribution}. 
+Similar to Table~\ref{table:ldatopicdistribution}, here we have shown the examples of 6 topics with author information, but here due to space limitation we only show the top 10 most likely words to be generated conditioned on the topic, and 4 top most likely authors to have generated a word conditioned on the topic. The topic-category distribution of the Author-Topic model is shown in Figure~\ref{fig:at_topic_category}. And our interpreting of the topic as well its words distribution can be shown in Table~\ref{table:at_topic_distribution}. 
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{figures/at_topic_category.pdf}
-\caption{Topic-Categoy distribution of Author-Topic model.}
+\caption{Topic-category distribution of Author-Topic model.}
 \label{fig:at_topic_category}
 \end{figure}
 
@@ -471,11 +472,11 @@ Similar to Table ~\ref{table:ldatopicdistribution}, here we have shown the examp
  \hline
  \end{tabular} 
 \hfill
-\caption{Author-Topic model Topic Distribution}
+\caption{The topic distribution of Author-Topic model}
 \label{table:at_topic_distribution}
 \end{table}
 
-We can see that the authorship is evenly distributed over the topics which means the authorship information is not very useful in our case since the authors' contribution for each topic can not be differentiated easily. The reason is that our 9 authors are virtually set and our expectation that the news in different categories are different has limited the flexibility of the topic assignment of the DAT model. To compare we have selected the BBC news published in the week of May 6th (which is different from the weeks in Section ~\ref{sec:ldadat}). We can see that the word distribution for DAT model is more specific and the author distribution is more diverse than AT model.  
+We can see that the authorship is evenly distributed over the topics which means the authorship information is not very useful in our case since the authors' contribution for each topic can not be differentiated easily. The reason is that our nine authors are virtually set and our expectation that the news in different categories are different has limited the flexibility of the topic assignment of the DAT model. To compare we have selected the BBC news published in the week of May 6th (which is different from the weeks in Section~\ref{sec:ldadat}). We can see that the word distribution for DAT model is more specific and the author distribution is more diverse than AT model.  
 
 
 \begin{table}[h!]
@@ -638,7 +639,7 @@ We can see that the authorship is evenly distributed over the topics which means
  \hline
  \end{tabular} 
 \hfill
-\caption{Dynamic Author-Topic model Topic Distribution, on May 6th}
+\caption{The topic distribution of Dynamic Author-Topic model on May 6th}
 \label{table:datat_topic_distribution}
 \end{table}
 
@@ -646,51 +647,109 @@ We can see that the authorship is evenly distributed over the topics which means
 We also see that the words generated for each topic using AT model is also general as LDA model. To answer \textbf{RQ1,3,4}, by comparing with our experimental results in Section \ref{sec:ldadat} definitely DAT works much better than AT model.
 
 
-\section{Performance Comparison between Dynamic Author-Topic and Dynamic Topic Models}
+\section{Performance Comparison between Dynamic Author-Topic and Topic Tracking models}
+In this section we will compare the performance of Topic Tracking model and the Dynamic Author-Topic model. The parameters of TTM model is set as $\alpha = 0.1$, and $\beta = 0.01$. DAT model has the same parameter setup besides that its author number is 9. For both the model the topic numbers are set as 20 for the experiment in Section \ref{dat_ttm_td}.
 \subsection{Perplexity}
-\subsection{Topic Distribution}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{figures/ttm_data_perplexity.png}
+\caption{Mean perplexity of DAT and TTM with varying numbers of latent topics.}
+\label{fig:ttm_dat_perplexity}
+\end{figure}
 
-Compared with Figure \ref{fig:dattopiccategory}
+The perplexity comparison between LDA and DAT model is shown in Figure~\ref{fig:ttm_dat_perplexity}, to answer \textbf{RQ6}, with small number of topics our DAT model performs better than TTM model, whereas with the increasing number of topics, the performances of the two models become to converge. Therefore with large number of topics the two models have a comparable generalization performance. For \textbf{RQ5} the performance of both models becomes better when the topic number is larger.
+
+
+\subsection{Topic Distribution}\label{dat_ttm_td}
+
+Again here we try to evaluate the classification performance of the two model in order to answer \textbf{RQ1, 3, 4} using the same methodology as in Section~\ref{ldadat_td}. In this section we will mainly show the experimental results of TTM model which will be compared with the results of DAT model as discussed in Section~\ref{ldadat_td}. We also use the same four weeks' data as those for DAT model in Section~\ref{ldadat_td}, which are the weeks from Jan 1 to Jan 7, from Feb 12 to Feb 19, from Jan Mar 4 to Mar 11, and from May 20 to May 27, so that the comparison of the experimental results of the two models are meaningful. 
 
 \begin{figure*}[!t]
   \centering
     \subfigure[2016.01.01 to 2016.01.07]{
-    \label{subfig:11dattopiccategory} 
-    \includegraphics[width=.48\columnwidth]{figures/11datcatogery.pdf}}
+    \label{subfig:11ttmtopiccategory} 
+    \includegraphics[width=.48\columnwidth]{figures/11ttmcatogery.pdf}}
     \subfigure[2016.02.12 to 2016.02.19]{
-    \label{subfig:212dattopiccategory} 
-    \includegraphics[width=.48\columnwidth]{figures/212datcatogery.pdf}}
+    \label{subfig:212ttmtopiccategory} 
+    \includegraphics[width=.48\columnwidth]{figures/212ttmcatogery.pdf}}
     \vspace*{-.9\baselineskip}
     \subfigure[2016.03.04 to 2016.03.11]{
-    \label{subfig:34dattopiccategory} 
-    \includegraphics[width=.48\columnwidth]{figures/34datcatogery.pdf}}
+    \label{subfig:34ttmtopiccategory} 
+    \includegraphics[width=.48\columnwidth]{figures/34ttmcatogery.pdf}}
     \subfigure[2016.05.20 to 2016.05.27]{
-    \label{subfig:520dattopiccategory} 
-    \includegraphics[width=.48\columnwidth]{figures/520datcatogery.pdf}}
-\caption{\small Topic-Category distribution of TTM model for 4 different weeks, which are between 2016.01.01 to 2016.01.07, between 2016.02.12 to 2016.02.19, between 2016.03.04 to 2016.03.11 and between 2016.05.20 to 2016.05.27}
-\label{fig:tottopiccategory}
+    \label{subfig:520ttmtopiccategory} 
+    \includegraphics[width=.48\columnwidth]{figures/520ttmcatogery.pdf}}
+\caption{\small Topic-category distribution of TTM model for 4 different weeks, which are between 2016.01.01 to 2016.01.07, between 2016.02.12 to 2016.02.19, between 2016.03.04 to 2016.03.11 and between 2016.05.20 to 2016.05.27.}
+\label{fig:ttmtopiccategory}
 \end{figure*}
 
+In Figure~\ref{fig:ttmtopiccategory} we present the topic-category distribution for TTM model for the four weeks, based on which we will interpret the real meaning underlying these topics so that we can further discover the topic evolution for TTM model. Figure~\ref{fig:ttmtopiccategory} shows that TTM's topics are also neatly and time-related, which is also better than LDA model. Compared to DAT model the topics of TTM are more prominent and topic segmentation are more distinctive.  
+
+Figure \ref{fig:ttm_education_tc}, Figure \ref{fig:ttm_uk_tc} and Figure \ref{fig:ttm_health_tc} here are used to show the evolution of the three topics, \textit{education, UK}, an \textit{health}, which can be respectively compared to the results of DAT model in Figure \ref{fig:dat_education_tc}, Figure~\ref{fig:dat_uk_tc} and Figure \ref{fig:dat_health_tc}.
+
+In Figure~\ref{fig:ttm_education_tc} it shows the topic evolution of \textit{education} for TTM model, compared to the result of DAT in Figure~\ref{fig:dat_education_tc}, we can see the following difference:
+\begin{itemize}
+    \item In the week of Jan 1st, for TTM model, we see the word of \textit{pupil} because of the news \textit{Every pupil in England will be expected to have memorised their times tables before leaving primary school, under new government plans}~\footnote{http://www.bbc.co.uk/news/education-35216318}, all the other words are general words related to education with no surprise, in contrast to DAT model where we see the words like \textit{islam} due to some specific news event.
+    \item In the week of Feb 12th, for TTM model it looks like it has confused between the topic of \textit{education} and \textit{UK}. Since words like \textit{party, Scotland} are obviously UK news related.
+    \item In the week of Mar 4th, for TTM model, we see the word \textit{pay} due to the news that \textit{School results don't justify academy trust pay}~\footnote{http://www.bbc.co.uk/news/education-35775458}, and \textit{force} due to the discussion that \textit{Are cadets a force for good in schools}~\footnote{http://www.bbc.co.uk/news/education-35780633}, here we see that TTM and DAT have discovered hot news in this week.
+    \item In the week of May 20th, we can see the topics discovered by TTM is quite different from DAT model. The news of \textit{A petition against government plans to freeze the salary threshold at which graduates must start paying back their student loans has topped 100,000 signatures}~\footnote{http://www.bbc.co.uk/news/education-36420790} and \textit{Scotland lags behind on poorer students}~\footnote{http://www.bbc.co.uk/news/education-36392685} are successfully discovered in the topic, while for DAT the topics is more focused on the news event like stopping publishing primary school students' score and some related to EU referendum.
+\end{itemize}
+
+In Figure~\ref{fig:ttm_uk_tc} it shows the topic evolution of \textit{UK} for TTM model, compared to the result of DAT in Figure~\ref{fig:dat_uk_tc}, we can see the following difference:
+\begin{itemize}
+    \item In the week of Jan 1st, for TTM model, we see the words are relative general compared to that of DAT model, and the news related to \textit{murder} is ignored by TTM model which could be hot news for that week. 
+    \item In the week of Feb 12th, TTM model performs very well for discovering the Syria related UK news, such as \textit{UK's Syria air strikes killed or injured 'seven IS fighters'}~\footnote{http://www.bbc.co.uk/news/uk-35607446} in which \textit{missile} is mentinoed a lot of times. However we see the word \textit{Korea} due to the news about \textit{new North Korea sanctions} because of its missile launch, which is actually a \textit{world} news. Therefore TTM is confounding the UK news and world news because that \textit{missile} and \textit{Syria}, \textit{Korea} all co-occurred.
+    \item In the week of Mar 4th, the TTM model also discovered the London mayor election, which is also found by DAT model. 
+    \item In the week of May 20th, all the top five words of topic \textit{UK} for TTM model is election related which is exactly the hot news in these days. DAT also discovered the election but its word distribution is more diverse. In this case for TTM model its word distribution can describe the topic's content very well whereas DAT outperforms in terms  the discovery of specific and diverse hot news.
+    \end{itemize}
+    
+In Figure~\ref{fig:ttm_health_tc} it shows the topic evolution of \textit{health} for TTM model, compared to the result of DAT in Figure~\ref{fig:dat_health_tc}, we can see the following difference:
+\begin{itemize}
+    \item In the week of Jan 1st, for TTM model, we see the words are general compared to that of DAT model, all the words are apparently health related.
+    \item In the week of Feb 12th, TTM outperforms DAT for pinpointing the news about Zika virus~\footnote{http://www.bbc.co.uk/news/health-35597465}~\footnote{http://www.bbc.co.uk/news/health-35552340}. The word black is there is because of the news \textit{Mental health care for black men in England criticised}~\footnote{http://www.bbc.co.uk/news/uk-england-35606171}.
+    \item In the week of Mar 4th, the word distribution for TTM model is similar to that of DAT model, the word \textit{Scotland} appears because of the discussion in a few news about the rise of the pay for health workers in Scotland.
+    \item In the week of May 20th, it looks like TTM has confused about the topic of \textit{health} and \textit{UK politics}. DAT outperforms TTM for this week since DAT's words are more health related.
+    \end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{figures/ttm_education_tc.png}
+\caption{Topic evolution of TTM model: use Education as an example}
+\label{fig:ttm_education_tc}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{figures/ttm_uk_tc.png}
+\caption{Topic evolution of TTM model: use UK as an example}
+\label{fig:ttm_uk_tc}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{figures/ttm_health_tc.png}
+\caption{Topic evolution of TTM model: use Health as an example}
+\label{fig:ttm_health_tc}
+\end{figure}
+
+In conclusion, to answer \textbf{RQ1}, TTM performs better than DAT in terms of segment topics, the topic-category distribution of TTM model is more prominent and distinctive than DAT model which means it is easy to tell the correspondence between category $c$ and topic $z$, however TTM has the drawback that its word description for a topic is always general and confounding on some news events with co-occurrence word patterns, its topic evolution is not as clear as DAT model. DAT model outperforms TTM model since (a) it is able to discover diverse and specific news event and (b) it is topic evolution successfully follow the rise and fall of the topic trending which is beneficial and more accurate to classify specific hot news. 
+
+
+
 \section{Comprehensive Comparison}
-Based on our experiments in Section 5.1 to 5.3, we can answer our research questons as follows,
+Based on our experiments in Section 5.1 to 5.3, we can answer our research questions as follows,
 \begin{description}
 	\item On the basis of classification performance:
 	\begin{description}
-	\item[\textbf{RQ1}:] How does the proposed DAT model perform compared to baseline algorithms in terms of topic extraction? %(See Section~\ref{subsec:diversification})
-	\item[\textbf{RQ2}:] How does the performance of the DAT model change with varying length of dependency time ?
-	\item[\textbf{RQ3}:] How does the proposed DAT model perform in terms of topic evolution? %(See Section~\ref{})
-	\item[\textbf{RQ4}:] How does the proposed DAT model perform in terms of preventing from confounding co-occurrence patterns for topic discovery? %(See Section~\ref{})
-	\item[\textbf{RQ5}:] Is the performance of DAT model sensitive to the number of topics used in the model? %(See Section~\ref{}) 
+	\item[\textbf{RQ1}:] The performance of topic extraction is observed with the following order: $\text{DAT} \geq \text{TTM} > \text{LDA} > \text{AT}$. Both DAT and TTM are able to discover time-narrowed topics but the ones extracted by DAT is more diverse and is able to track the news event trends. AT is inferior to LDA our experiment because of the low number of authors, since we only use virtual author here so the authorship is somewhat randomly assigned which limits the predictive power of the AT model. DAT overcomes this drawback because its parameters are adaptive to the time and content of the news documents. 
+	\item[\textbf{RQ3}:] The topic evolution of DAT model is better than TTM model as discussed in Section 5.3.
+	\item[\textbf{RQ4}:] The order of the performances of the four models is  
+	$\text{DAT} > \text{TTM} > \text{AT} = \text{LDA}$. Since AT and LDA models are both static so it is easily to confuse about the news events spreading through the time. The authorship information of DAT helps it to discover more specific and diverse hot news topic thanks to the knowledge which provides a better prior for the news document. 
+	\item[\textbf{RQ5}:] Yes, with the increasing number of topics its performance is getting better.
 	\end{description}
 	\item On the basis of the generative model:
 	\begin{description}
-	\item[\textbf{RQ6}:] What is the performance of the generative DAT model compared to other baseline topic models in terms of the likelihood of generating the news document measured by perplexity as discussed in Section ~\ref{sec:perpelexity}?
+	\item[\textbf{RQ6}:] For a small number of topics, the performance order is	$\text{LDA} > \text{AT} > \text{DAT} > \text{TTM}$. While with the increasing number of topics DAT's performance becomes better and the order should be $\text{DAT} = \text{TTM} > \text{LDA} > \text{AT}$.
 	\end{description}
 \end{description}
-\subsection{Perplexity}
-\subsection{Topic Distribution}
-
-
 
 
 \section{Performance with Different Time Slices}
@@ -698,24 +757,26 @@ Based on our experiments in Section 5.1 to 5.3, we can answer our research quest
 
 % This just dumps some pseudolatin in so you can see some text in place.
 \subsection{Topic Distribution}
-In this part in order to compare to the results in Figure ~\ref{fig:dat_health_tc}, ~\ref{fig:dat_uk_tc} and \ref{fig:dat_education_tc}, we will show the topic evolution for topic \textit{health, education} and \textit{UK}. The topic number here is set as 20. 
+In this part in order to compare to the results in Figure~\ref{fig:dat_health_tc},~\ref{fig:dat_uk_tc} and~\ref{fig:dat_education_tc}, we will show the topic evolution for topic \textit{health, education} and \textit{UK}. The topic number here is set as 20. 
 
-When news dependency term is two week, namely half a month, we show the topic evolution of topic \textit{health} in Table ~\ref{dat_2_health_evoluation}.
+When news dependency term is two week, namely half a month, we show the topic evolution of topic \textit{health} in Table~\ref{dat_2_health_evoluation}.
 
-The topic evolution of topic \textit{UK} is in Table \ref{dat_2_uk_evoluation}. 
+The topic evolution of topic \textit{UK} is in Table~\ref{dat_2_uk_evoluation}. 
 
-The topic evolution of topic \textit{Education} is in Table \ref{dat_2_educatoin_evoluation}.
+The topic evolution of topic \textit{Education} is in Table~\ref{dat_2_educatoin_evoluation}.
 
-When news dependency term is four weeks, namely a month, we show the topic evolution of topic \textit{health} in Table ~\ref{dat_4_health_evoluation}.
+When news dependency term is four weeks, namely a month, we show the topic evolution of topic \textit{health} in Table~\ref{dat_4_health_evoluation}.
 
-The topic evolution of topic \textit{UK} is in Table \ref{dat_4_uk_evoluation}. 
+The topic evolution of topic \textit{UK} is in Table~\ref{dat_4_uk_evoluation}. 
 
-The topic evolution of topic \textit{Education} is in Table \ref{dat_4_educatoin_evoluation}.
+The topic evolution of topic \textit{Education} is in Table~\ref{dat_4_educatoin_evoluation}.
 
 It can be obviously seen that with the increasing of the length of time dependency, the words to describe the topic becomes more general and the the model starts to confound the news event happening in one time period.
 
+In this chapter the experimental results are shown in different rules as will as the performance comparison of other three baselines. In the next chapter we will give a conclusion of the thesis.
+
 \begin{table}
-\caption{Topic Distribution Evolution for Topic Health.(2 weeks as a time unit)}
+\caption{Topic distribution evolution for topic Health (2 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -798,7 +859,7 @@ health  \\
 \end{table}
 
 \begin{table}
-\caption{Topic Distribution Evolution for Topic UK.(2 weeks as a time unit)}
+\caption{Topic distribution evolution for topic UK (2 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -882,7 +943,7 @@ office   \\
 \end{table}
 
 \begin{table}
-\caption{Topic Distribution Evolution for Topic Educatoin.(2 weeks as a time unit)}
+\caption{Topic distribution evolution for topic Education (2 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -966,7 +1027,7 @@ london   \\
 \end{table}
 
 \begin{table}
-\caption{Topic Distribution Evolution for Topic Health.(4 weeks as a time unit)}
+\caption{Topic distribution evolution for topic Health (4 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -1050,7 +1111,7 @@ chang e  \\
 \end{table}
 
 \begin{table}
-\caption{Topic Distribution Evolution for Topic UK.(4 weeks as a time unit)}
+\caption{Topic distribution evolution for topic UK (4 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -1130,11 +1191,11 @@ tax \\
 };
 \draw [rounded corners=.5em] (table.north west) rectangle (table.south east);
 \end{tikzpicture}
-\label{dat_2_uk_evoluation}
+\label{dat_4_uk_evoluation}
 \end{table}
 
 \begin{table}
-\caption{Topic Distribution Evolution for Topic Educatoin.(4 weeks as a time unit)}
+\caption{Topic distribution evolution for topic Education (4 weeks as a time unit)}
 \centering
 \begin{tikzpicture}
 \node (table) [inner sep=0pt] {
@@ -1216,5 +1277,5 @@ since  \\
 };
 \draw [rounded corners=.5em] (table.north west) rectangle (table.south east);
 \end{tikzpicture}
-\label{dat_2_educatoin_evoluation}
+\label{dat_4_educatoin_evoluation}
 \end{table}
